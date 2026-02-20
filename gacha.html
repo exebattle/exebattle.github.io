@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha System</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .gacha-container { max-width: 600px; margin: auto; text-align: center; }
+        .button { margin: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .result { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="gacha-container">
+        <h1>Gacha System</h1>
+        <h2>Character Gacha</h2>
+        <button class="button" id="characterGachaBtn">Pull Character</button>
+        <div id="characterResult" class="result"></div>
+
+        <h2>Skin Gacha</h2>
+        <button class="button" id="skinGachaBtn">Pull Skin</button>
+        <div id="skinResult" class="result"></div>
+
+        <h2>Emote Gacha</h2>
+        <button class="button" id="emoteGachaBtn">Pull Emote</button>
+        <div id="emoteResult" class="result"></div>
+
+        <h2>Tag Gacha</h2>
+        <button class="button" id="tagGachaBtn">Pull Tag</button>
+        <div id="tagResult" class="result"></div>
+
+        <h2>Currency Management</h2>
+        <div>Available Currency: <span id="currencyAmount">100</span></div>
+    </div>
+
+    <script>
+        let currency = 100;
+        let pityCounter = 0;
+        const pityThreshold = 10;
+
+        function randomPull(type) {
+            const items = {
+                character: ["Hero A", "Hero B", "Hero C"],
+                skin: ["Skin 1", "Skin 2", "Skin 3"],
+                emote: ["Emote Laugh", "Emote Cry", "Emote Cheer"],
+                tag: ["Rare", "Epic", "Legendary"]
+            };
+
+            // Implementing pity system
+            if (pityCounter >= pityThreshold) {
+                pityCounter = 0;
+                return `${type.charAt(0).toUpperCase() + type.slice(1)} (Guaranteed after pity)`;
+            }
+
+            pityCounter++;
+            return items[type][Math.floor(Math.random() * items[type].length)];
+        }
+
+        document.getElementById('characterGachaBtn').onclick = function() {
+            if (currency >= 10) {
+                currency -= 10;
+                document.getElementById('currencyAmount').innerText = currency;
+                document.getElementById('characterResult').innerText = randomPull('character');
+            } else {
+                alert('Not enough currency!');
+            }
+        };
+
+        document.getElementById('skinGachaBtn').onclick = function() {
+            if (currency >= 5) {
+                currency -= 5;
+                document.getElementById('currencyAmount').innerText = currency;
+                document.getElementById('skinResult').innerText = randomPull('skin');
+            } else {
+                alert('Not enough currency!');
+            }
+        };
+
+        document.getElementById('emoteGachaBtn').onclick = function() {
+            if (currency >= 3) {
+                currency -= 3;
+                document.getElementById('currencyAmount').innerText = currency;
+                document.getElementById('emoteResult').innerText = randomPull('emote');
+            } else {
+                alert('Not enough currency!');
+            }
+        };
+
+        document.getElementById('tagGachaBtn').onclick = function() {
+            if (currency >= 2) {
+                currency -= 2;
+                document.getElementById('currencyAmount').innerText = currency;
+                document.getElementById('tagResult').innerText = randomPull('tag');
+            } else {
+                alert('Not enough currency!');
+            }
+        };
+    </script>
+</body>
+</html>
