@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExeBattle - Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 20, 40, 0.9);
+            border: 2px solid #00FF00;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #FF007F;
+            padding-bottom: 20px;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF007F, #00FF00);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+        }
+        
+        .username {
+            font-size: 32px;
+            color: #00FF00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            margin: 10px 0;
+        }
+        
+        .uid {
+            color: #00FFFF;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-box {
+            background: rgba(30, 30, 60, 0.8);
+            border: 1px solid #FF007F;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            color: #00FFFF;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            color: #00FF00;
+            font-weight: bold;
+        }
+        
+        .rank-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 5px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+        }
+        
+        .rank-bronze {
+            background: #CD7F32;
+            color: #000;
+        }
+        
+        .rank-silver {
+            background: #C0C0C0;
+            color: #000;
+        }
+        
+        .rank-gold {
+            background: #FFD700;
+            color: #000;
+        }
+        
+        .rank-mythic {
+            background: linear-gradient(135deg, #FF007F, #00FF00);
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.8); }
+        }
+        
+        .xp-bar {
+            background: rgba(100, 100, 100, 0.3);
+            border: 1px solid #00FFFF;
+            border-radius: 10px;
+            height: 30px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .xp-progress {
+            background: linear-gradient(90deg, #00FF00, #FFD700);
+            height: 100%;
+            width: 65%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .kd-ratio {
+            font-size: 20px;
+            color: #FF007F;
+            font-weight: bold;
+        }
+        
+        .collection {
+            margin-top: 30px;
+            border-top: 2px solid #00FFFF;
+            padding-top: 20px;
+        }
+        
+        .collection-title {
+            color: #00FFFF;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .item {
+            background: rgba(30, 30, 60, 0.8);
+            border: 1px solid #FF007F;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .item:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            transform: scale(1.05);
+        }
+        
+        .btn-back {
+            background: linear-gradient(135deg, #FF007F, #FF80BF);
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="avatar">👾</div>
+            <div class="username" id="username">ExeBattle_Player</div>
+            <div class="uid" id="uid">UID: ABC123XYZ789</div>
+            <div>
+                <span class="rank-badge rank-gold">GOLD RANK</span>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">LEVEL</div>
+                <div class="stat-value" id="level">25</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">RANK</div>
+                <div class="stat-value" style="color: #FFD700;">GOLD</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">TOTAL WINS</div>
+                <div class="stat-value" id="totalWins">42</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">TOTAL KILLS</div>
+                <div class="stat-value" id="totalKills">287</div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="stat-label">K/D RATIO</div>
+            <div class="kd-ratio" id="kdRatio">3.2</div>
+        </div>
+        
+        <div>
+            <div class="stat-label">EXPERIENCE</div>
+            <div class="xp-bar">
+                <div class="xp-progress">6,500 / 10,000 XP</div>
+            </div>
+        </div>
+        
+        <div class="collection">
+            <div class="collection-title">🎨 SKINS & COSMETICS</div>
+            <div class="items-grid">
+                <div class="item">
+                    <div>🟦</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Default</div>
+                </div>
+                <div class="item">
+                    <div>🟥</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Fire</div>
+                </div>
+                <div class="item">
+                    <div>⚡</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Electric</div>
+                </div>
+                <div class="item">
+                    <div>❄️</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Frozen</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="collection">
+            <div class="collection-title">🏷️ TAGS</div>
+            <div class="items-grid">
+                <div class="item">
+                    <div>🐺</div>
+                    <div style="font-size: 10px; margin-top: 5px;">LoneWolf</div>
+                </div>
+                <div class="item">
+                    <div>💀</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Reaper</div>
+                </div>
+                <div class="item">
+                    <div>⚔️</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Warrior</div>
+                </div>
+                <div class="item">
+                    <div>👑</div>
+                    <div style="font-size: 10px; margin-top: 5px;">Champion</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn-back" onclick="window.location.href='lobby.html'">← BACK TO LOBBY</button>
+    </div>
+</body>
+</html>
