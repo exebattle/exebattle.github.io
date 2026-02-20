@@ -1,0 +1,38 @@
+.container {
+  background-color: #0f0f0f; /* Dark background for neon effect */
+  color: #FFFFFF; /* White text */
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+.button {
+  background-color: #FF007F; /* Neon pink */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #FF80BF; /* Lighter pink on hover */
+  box-shadow: 0 0 30px rgba(255, 0, 127, 1);
+}
+
+.header {
+  color: #00FF00; /* Neon green */
+  font-size: 48px;
+  text-shadow: 2px 2px 10px rgba(0, 255, 0, 0.8);
+}
+
+.footer {
+  font-size: 14px;
+  color: #CCCCCC;
+}
